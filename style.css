@@ -14,7 +14,7 @@
 
 #custom-image-editor-modal {
     display: none;
-    position: fixed;
+    position: absolute;
     z-index: 555556;
     left: 0;
     top: 0;
@@ -160,7 +160,7 @@ input#happy-check {
     }
 
     .modal-content {
-        width: 100%; 
+        width: 85%; 
     }
 
     .image-controlers {
@@ -229,6 +229,6 @@ input#happy-check {
         max-height: 500px !important;
     }
 }
-.image-controlers,.modal-content {
+.image-controlers {
     display: none;
 }

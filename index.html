@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-    <script src="http://fabricjs.com/lib/fabric.js" data-cover></script>
+    <script src="fabric.js" data-cover></script>
     <script src="script.js" data-cover></script>
 </head>
 <body>
@@ -18,7 +18,9 @@
         <span class="close-button">×</span>
         <div class="row-flex">
             <div class="col col-12 col-md-8 canvas-div">
-                <div class="canvas-container" style="width: 1500px; height: 1500px; position: relative; user-select: none;"><canvas id="image-editor-canvas" class="image-editor-canvas lower-canvas" width="1500" height="1500" style="position: absolute; width: 1500px; height: 1500px; left: 0px; top: 0px; touch-action: none; user-select: none;"></canvas><canvas class="upper-canvas image-editor-canvas" width="1500" height="1500" style="position: absolute; width: 1500px; height: 1500px; left: 0px; top: 0px; touch-action: none; user-select: none; cursor: move;"></canvas></div>
+                <canvas id="image-editor-canvas" class="image-editor-canvas" width="1500" height="1500">
+                    <img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/assets/img/frame.png" >
+                </canvas>
                 <div class="image-controlers" style="display: block;">
                     <button type="button" id="zoom-in-button"><img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/templates/../assets/img/plus.svg"></button>
                     <button type="button" id="zoom-out-button"><img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/templates/../assets/img/minus.svg"></button>
