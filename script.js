@@ -3,10 +3,10 @@ jQuery(document).ready(function($) {
     var modal = $('#custom-image-editor-modal');
     var btn = $('#image-customizer-button');
     var span = $('.close-button');
-    var frameURL = ajax_object.ajax_frameurl; 
-    var font_family = ajax_object.font_family; 
-    var font_size = ajax_object.font_size;
-    var font_weight = ajax_object.font_weight;
+    var frameURL = 'https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/assets/img/frame.png'; 
+    var font_family = 'Lato'; 
+    var font_size = '90';
+    var font_weight = '700';
     var frame, userImage, userText;
     fabric.Object.prototype.cornerStyle = 'circle';
 
@@ -329,30 +329,30 @@ jQuery(document).ready(function($) {
             var imageData = canvas.toDataURL('image/png');
             var addYourText = $('#cwcustomizer_add_your_text').val();
             var fontColor = $('#cwcustomizer_font_color').val();
-            $.ajax({
-                url: ajax_object.ajax_url,
-                type: 'POST',
-                data: {
-                    action: 'save_cwcustomizer_image',
-                    image_data: imageData,
-                    add_your_text: addYourText,
-                    font_color: fontColor
-                },
-                success: function(response) {
-                    if (response.success) {
-                        // Save the image URL to a hidden field
-                        $('#cwcustomizer_image_data').val(response.data.image_url);
-                        // Close the image editor popup and trigger add to cart button
-                        $('.single_add_to_cart_button').trigger('click');
-                        $('#custom-image-editor-modal').hide();
-                    } else {
-                        alert('Failed to save image: ' + response.data);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error saving image:', error);
-                }
-            });
+            // $.ajax({
+            //     url: ajax_object.ajax_url,
+            //     type: 'POST',
+            //     data: {
+            //         action: 'save_cwcustomizer_image',
+            //         image_data: imageData,
+            //         add_your_text: addYourText,
+            //         font_color: fontColor
+            //     },
+            //     success: function(response) {
+            //         if (response.success) {
+            //             // Save the image URL to a hidden field
+            //             $('#cwcustomizer_image_data').val(response.data.image_url);
+            //             // Close the image editor popup and trigger add to cart button
+            //             $('.single_add_to_cart_button').trigger('click');
+            //             $('#custom-image-editor-modal').hide();
+            //         } else {
+            //             alert('Failed to save image: ' + response.data);
+            //         }
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.error('Error saving image:', error);
+            //     }
+            // });
         }
     });
 });
