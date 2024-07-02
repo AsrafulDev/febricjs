@@ -229,6 +229,6 @@ input#happy-check {
         max-height: 500px !important;
     }
 }
-.image-controlers {
+.image-controlers,.modal-content {
     display: none;
 }
