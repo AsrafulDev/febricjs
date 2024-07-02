@@ -1,14 +1,15 @@
-document.addEventListener('DOMContentLoaded', function() {
+jQuery(document).ready(function($) {
     var canvas = new fabric.Canvas('image-editor-canvas');
-    var modal = document.getElementById('custom-image-editor-modal');
-    var btn = document.getElementById('image-customizer-button');
-    var span = document.querySelector('.close-button');
+    var modal = $('#custom-image-editor-modal');
+    var btn = $('#image-customizer-button');
+    var span = $('.close-button');
     var frameURL = 'https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/assets/img/frame.png'; 
     var font_family = 'Lato'; 
     var font_size = '90';
     var font_weight = '700';
     var frame, userImage, userText;
     fabric.Object.prototype.cornerStyle = 'circle';
+
 
     // Load frame image and add it to the canvas
     fabric.Image.fromURL(frameURL, function(img) {
@@ -18,19 +19,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Open modal on button click
-    btn.addEventListener('click', function() {
-        modal.style.display = 'block';
+    btn.on('click touchstart', function() {
+        modal.show();
     });
 
     // Close modal on close button click
-    span.addEventListener('click', function() {
-        modal.style.display = 'none';
+    span.on('click touchstart', function() {
+        modal.hide();
     });
 
     // Close modal when clicking outside of it
-    window.addEventListener('click', function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
+    $(window).on('click touchstart', function(event) {
+        if (event.target == modal[0]) {
+            modal.hide();
         }
     });
 
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var userImage = null;
 
     // Handle image upload
-    document.getElementById('image-upload-input').addEventListener('change', function(e) {
+    $('#image-upload-input').on('change', function(e) {
         var reader = new FileReader();
         reader.onload = function(event) {
             // Remove previous userImage if exists
@@ -106,22 +107,22 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         };
         reader.readAsDataURL(e.target.files[0]);
-        document.getElementById('remove-image-button').style.display = 'block';
-        document.querySelector('.image-controlers').style.display = 'block';
+        $('#remove-image-button').show();
+        $('.image-controlers').show();
     });
 
-    document.getElementById('remove-image-button').addEventListener('click', function(event) {
+    $('#remove-image-button').on('click touchstart', function(event) {
         event.preventDefault();
         if (userImage) {
             canvas.remove(userImage);
             userImage = null;
         }
-        document.getElementById('remove-image-button').style.display = 'none';
-        document.querySelector('.image-controlers').style.display = 'none';
+        $('#remove-image-button').hide();
+        $('.image-controlers').hide();
     });
 
     // Ensure frame is always on top when the mouse leaves the canvas
-    document.querySelector('.canvas-div').addEventListener('mouseleave', function() {
+    $('.canvas-div').on('mouseleave touchend', function() {
         canvas.sendToBack(userImage); 
         canvas.bringToFront(frame);
     });
@@ -142,21 +143,30 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.renderAll();
     }
 
-    document.querySelector('.field-div').addEventListener('click', function() {
+    $('.field-div').on('click touchstart', function() {
         allRender();
     });
 
     setInterval(allRender, 5000);
 
+    // canvas.on('mouse:down touchstart', function(e) {
+    //     if (!e.target) { 
+    //         canvas.sendToBack(userImage); 
+    //         canvas.bringToFront(frame);
+    //         canvas.discardActiveObject();
+    //         canvas.renderAll();
+    //     }
+    // });
+
     // Handle text input
-    document.getElementById('text-input').addEventListener('input', function(e) {
-        var inputText = e.target.value.substring(0, 25); // Limit to 25 characters
+    $('#text-input').on('input', function(e) {
+        var inputText = $(this).val().substring(0, 25); // Limit to 25 characters
     
-        var textColor = document.getElementById('text-color-black').classList.contains('active') ? '#000000' : '#FFFFFF';
-        var fontColor = document.getElementById('text-color-black').classList.contains('active') ? 'Black' : 'White';
+        var textColor = $('#text-color-black').hasClass('active') ? '#000000' : '#FFFFFF';
+        var fontColor = $('#text-color-black').hasClass('active') ? 'Black' : 'White';
       
-        document.getElementById('cwcustomizer_add_your_text').value = inputText;
-        document.getElementById('cwcustomizer_font_color').value = fontColor;
+        $('#cwcustomizer_add_your_text').val(inputText);
+        $('#cwcustomizer_font_color').val(fontColor);
 
         // Define the circular path
         var path = new fabric.Path("M 0 399.996 C 0 92.553 333.351 -99.631 600 54.108 C 723.77 125.454 800 257.31 800 399.996 C 800 707.447 466.663 899.637 200 745.885 C 76.242 674.546 0 542.685 0 399.996", {
@@ -188,27 +198,27 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.sendToBack(userImage); 
         canvas.add(userText);
         canvas.renderAll();
-    });
+    });    
 
     // Handle text color selection
-    document.getElementById('text-color-black').addEventListener('click', function() {
+    $('#text-color-black').on('click touchstart', function() {
         if (userText) {
             userText.set('fill', '#000000');
             canvas.renderAll();
         }
-        this.classList.add('active');
-        document.getElementById('text-color-white').classList.remove('active');
-        document.getElementById('cwcustomizer_font_color').value = 'Black';
+        $(this).addClass('active');
+        $('#text-color-white').removeClass('active');
+        $('#cwcustomizer_font_color').val('Black');
     });
 
-    document.getElementById('text-color-white').addEventListener('click', function() {
+    $('#text-color-white').on('click touchstart', function() {
         if (userText) {
             userText.set('fill', '#FFFFFF');
             canvas.renderAll();
         }
-        this.classList.add('active');
-        document.getElementById('text-color-black').classList.remove('active');
-        document.getElementById('cwcustomizer_font_color').value = 'White';
+        $(this).addClass('active');
+        $('#text-color-black').removeClass('active');
+        $('#cwcustomizer_font_color').val('White');
     });
 
     // Utility function to prevent default action and execute a callback
@@ -219,32 +229,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Helper function to handle repetitive action
     function handleHold(buttonSelector, actionFunction) {
-        var interval;
-        var button = document.querySelector(buttonSelector);
+        let interval;
 
-        button.addEventListener('mousedown', function(event) {
+        $(buttonSelector).on('mousedown touchstart', function(event) {
             preventDefaultAndExecute(event, function() {
                 actionFunction();
                 interval = setInterval(actionFunction, 100); // Repeat every 100 ms
             });
         });
 
-        button.addEventListener('mouseup', function() {
-            clearInterval(interval);
-        });
-
-        button.addEventListener('mouseleave', function() {
-            clearInterval(interval);
-        });
-
-        button.addEventListener('touchstart', function(event) {
-            preventDefaultAndExecute(event, function() {
-                actionFunction();
-                interval = setInterval(actionFunction, 100); // Repeat every 100 ms
-            });
-        });
-
-        button.addEventListener('touchend', function() {
+        $(buttonSelector).on('mouseup mouseleave touchend', function() {
             clearInterval(interval);
         });
     }
@@ -310,70 +304,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    document.getElementById('upload-image-button').addEventListener('click', function() { 
-        document.getElementById('image-upload-input').click();
+    $('#upload-image-button').on('click touchstart', function(){ 
+        $('#image-upload-input').trigger('click');
     });
-
+    
     // Handle adding image to cart
-    document.getElementById('add-to-cart-button').addEventListener('click', function(event) {
+    $('#add-to-cart-button').on('click touchstart', function(event) {
         event.preventDefault();
         
-        var checkboxChecked = document.getElementById('happy-check').checked;
+        var checkboxChecked = $('#happy-check').is(':checked');
         
         // Remove any existing error messages
-        var errorMessages = document.querySelectorAll('.error-message');
-        errorMessages.forEach(function(message) {
-            message.remove();
-        });
+        $('.error-message').remove();
         
         if (!userImage || !checkboxChecked) {
             if (!userImage) {
-                var imageUploadDiv = document.getElementById('image-upload-div');
-                var errorMessage = document.createElement('p');
-                errorMessage.className = 'error-message';
-                errorMessage.style.color = 'red';
-                errorMessage.textContent = 'Image is required';
-                imageUploadDiv.insertAdjacentElement('beforebegin', errorMessage);
+                $('#image-upload-div').before('<p class="error-message" style="color: red;">Image is required</p>');
             }
             if (!checkboxChecked) {
-                var happyCheck = document.getElementById('happy-check');
-                var errorMessage = document.createElement('p');
-                errorMessage.className = 'error-message';
-                errorMessage.style.color = 'red';
-                errorMessage.textContent = 'You must accept the conditions';
-                happyCheck.insertAdjacentElement('beforebegin', errorMessage);
+                $('#happy-check').before('<p class="error-message" style="color: red;">You must accept the conditions</p>');
             }
         } else {
             var imageData = canvas.toDataURL('image/png');
-            var addYourText = document.getElementById('cwcustomizer_add_your_text').value;
-            var fontColor = document.getElementById('cwcustomizer_font_color').value;
-            fetch(ajax_object.ajax_url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    action: 'save_cwcustomizer_image',
-                    image_data: imageData,
-                    add_your_text: addYourText,
-                    font_color: fontColor
-                })
-            })
-            .then(response => response.json())
-            .then(response => {
-                if (response.success) {
-                    // Save the image URL to a hidden field
-                    document.getElementById('cwcustomizer_image_data').value = response.data.image_url;
-                    // Close the image editor popup and trigger add to cart button
-                    document.querySelector('.single_add_to_cart_button').click();
-                    modal.style.display = 'none';
-                } else {
-                    alert('Failed to save image: ' + response.data);
-                }
-            })
-            .catch(error => {
-                console.error('Error saving image:', error);
-            });
+            var addYourText = $('#cwcustomizer_add_your_text').val();
+            var fontColor = $('#cwcustomizer_font_color').val();
+            // $.ajax({
+            //     url: ajax_object.ajax_url,
+            //     type: 'POST',
+            //     data: {
+            //         action: 'save_cwcustomizer_image',
+            //         image_data: imageData,
+            //         add_your_text: addYourText,
+            //         font_color: fontColor
+            //     },
+            //     success: function(response) {
+            //         if (response.success) {
+            //             // Save the image URL to a hidden field
+            //             $('#cwcustomizer_image_data').val(response.data.image_url);
+            //             // Close the image editor popup and trigger add to cart button
+            //             $('.single_add_to_cart_button').trigger('click');
+            //             $('#custom-image-editor-modal').hide();
+            //         } else {
+            //             alert('Failed to save image: ' + response.data);
+            //         }
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.error('Error saving image:', error);
+            //     }
+            // });
         }
     });
+
 });
