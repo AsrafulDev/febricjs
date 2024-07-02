@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FabricJS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" id="image-customizer-js-js-extra">
+        /* <![CDATA[ */
+        var ajax_object = {"ajax_url":"https:\/\/dev-workings.pantheonsite.io\/wp-admin\/admin-ajax.php","ajax_frameurl":"https:\/\/dev-workings.pantheonsite.io\/wp-content\/plugins\/image-customizer\/assets\/img\/frame.png","font_family":"Lato","font_size":"90","font_weight":"700"};
+        /* ]]> */
+        </script>
+    <script src="http://fabricjs.com/lib/fabric.js" data-cover></script>
+    <script src="script.js" data-cover></script>
+</head>
+<body>
+ <button type="button" id="image-customizer-button">PERSONALISE YOUR TOPPERS</button>
+ <input type="hidden" name="cwcustomizer_image_data" id="cwcustomizer_image_data">
+ <div id="custom-image-editor-modal" style="display: block;">
+    <div class="modal-content">
+        <span class="close-button">×</span>
+        <div class="row-flex">
+            <div class="col col-12 col-md-8 canvas-div">
+                <div class="canvas-container" style="width: 1500px; height: 1500px; position: relative; user-select: none;"><canvas id="image-editor-canvas" class="image-editor-canvas lower-canvas" width="1500" height="1500" style="position: absolute; width: 1500px; height: 1500px; left: 0px; top: 0px; touch-action: none; user-select: none;"></canvas><canvas class="upper-canvas image-editor-canvas" width="1500" height="1500" style="position: absolute; width: 1500px; height: 1500px; left: 0px; top: 0px; touch-action: none; user-select: none; cursor: move;"></canvas></div>
+                <div class="image-controlers" style="display: block;">
+                    <button type="button" id="zoom-in-button"><img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/templates/../assets/img/plus.svg"></button>
+                    <button type="button" id="zoom-out-button"><img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/templates/../assets/img/minus.svg"></button>
+                    <button type="button" id="rotate-button"><img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/templates/../assets/img/rotate.svg"></button>
+                    <button type="button" id="rotate-button-r"><img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/templates/../assets/img/rotate-r.svg"></button>
+                    <button type="button" id="move-up-button"><img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/templates/../assets/img/up.svg"></button>
+                    <button type="button" id="move-down-button"><img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/templates/../assets/img/down.svg"></button>
+                    <button type="button" id="move-left-button"><img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/templates/../assets/img/left.svg"></button>
+                    <button type="button" id="move-right-button"><img src="https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/templates/../assets/img/right.svg"></button>
+                </div>
+            </div>
+            <div class="col col-12 col-md-4 field-div">
+                <p class="image-upload-text">Personalise your toppers*</p>
+                <div class="image-upload-div" id="image-upload-div"> <!-- Added ID for validation -->
+                    <button type="button" id="upload-image-button">Image Upload</button>
+                    <input type="file" id="image-upload-input" accept="image/*" required="">
+                    <button type="button" id="remove-image-button" style="display: inline-flex;">X</button>
+                </div>
+                <p class="image-upload-condition-text"></p>
+                <label for="text-input">Enter Text:<span style="font-size: 10px;">(Max 25 character)</span></label>
+                <input type="text" id="text-input" placeholder="Your Text Here" maxlength="25" autocomplete="off"><br><br>
+                <label>Text Color:</label><br>
+                <button type="button" id="text-color-white"></button>
+                <button type="button" id="text-color-black" class="active"></button><br><br>
+                <label for="happy-check">
+                    <input type="checkbox" value="" id="happy-check" required="">
+                                    </label>
+                <br><br>
+                <button type="button" id="add-to-cart-button">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
