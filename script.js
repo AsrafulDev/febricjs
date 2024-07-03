@@ -78,7 +78,7 @@ jQuery(document).ready(function($) {
 
                 // Define the circular mask
                 var mask = new fabric.Circle({
-                    radius: 525, 
+                    radius: 352, 
                     originX: 'center',
                     originY: 'center',
                     top: canvas.height / 2,
@@ -169,7 +169,7 @@ jQuery(document).ready(function($) {
         $('#cwcustomizer_font_color').val(fontColor);
 
         // Define the circular path
-        var path = new fabric.Path("M 0 266.497 C 0 61.664 222.095 -66.379 399.75 36.05 C 482.212 83.584 533 171.433 533 266.497 C 533 471.337 310.914 599.383 133.25 496.946 C 50.796 449.416 0 361.564 0 266.497", {
+        var path = new fabric.Path("M 0 229.998 C 0 53.219 191.677 -57.288 345 31.113 C 416.167 72.136 460 147.953 460 229.998 C 460 406.782 268.331 517.292 115 428.884 C 43.839 387.864 0 312.044 0 229.998", {
             strokeWidth: 1,
             fill: "#00000000",
         });
