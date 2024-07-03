@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
     var modal = $('#custom-image-editor-modal');
     var btn = $('#image-customizer-button');
     var span = $('.close-button');
-    var frameURL = 'https://dev-workings.pantheonsite.io/wp-content/plugins/image-customizer/assets/img/frame.png'; 
+    var frameURL = 'frame.png'; 
     var font_family = 'Lato'; 
     var font_size = '90';
     var font_weight = '700';
@@ -169,7 +169,7 @@ jQuery(document).ready(function($) {
         $('#cwcustomizer_font_color').val(fontColor);
 
         // Define the circular path
-        var path = new fabric.Path("M 0 399.996 C 0 92.553 333.351 -99.631 600 54.108 C 723.77 125.454 800 257.31 800 399.996 C 800 707.447 466.663 899.637 200 745.885 C 76.242 674.546 0 542.685 0 399.996", {
+        var path = new fabric.Path("M 0 266.497 C 0 61.664 222.095 -66.379 399.75 36.05 C 482.212 83.584 533 171.433 533 266.497 C 533 471.337 310.914 599.383 133.25 496.946 C 50.796 449.416 0 361.564 0 266.497", {
             strokeWidth: 1,
             fill: "#00000000",
         });

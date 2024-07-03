@@ -229,6 +229,4 @@ input#happy-check {
         max-height: 500px !important;
     }
 }
-.image-controlers {
-    display: none;
-}
+#remove-image-button,.image-controlers{  display: none;}
